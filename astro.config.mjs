@@ -1,7 +1,6 @@
-// @ts-check
+// astro.config.mjs
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  outDir: 'docs',
-  base: '/astro_website/',
+  base: '/astro_website/', // must match your GitHub repo name exactly
 });
