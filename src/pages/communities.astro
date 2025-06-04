@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import PortfolioPreview from '../components/PortfolioPreview.astro';
+import Hero from '../components/Hero.astro';
+import Grid from '../components/Grid.astro';
+
+const projects = (await getCollection('communities')).sort(
+	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+
+console.log(projects); // ✅ Add this
+---
+
+<BaseLayout
+	title="Communities"
+	description="Explore the communities I’m part of or have contributed to."
+>
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-8">
+			<Hero
+				title="Communities"
+				tagline="Explore the communities I’m part of or have contributed to."
+				align="start"
+			/>
+			<Grid variant="offset">
+				{
+					projects.map((project) => (
+						<li>
+							<PortfolioPreview project={project} />
+						</li>
+					))
+				}
+			</Grid>
+		</main>
+		<ContactCTA />
+	</div>
+</BaseLayout>
